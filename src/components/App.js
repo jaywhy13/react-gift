@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Letter from "./Letter";
+import "./App.css";
 
 import { getSentences, getNextWord } from "../api";
 
@@ -17,14 +18,17 @@ class App extends Component {
     const { sentences } = this.state;
     return (
       <div className="App">
-        <Letter sentences={sentences} />
-
-        <button
-          onClick={() => this.goToNextWord()}
-          disabled={this.state.puzzle}
-        >
-          Next
-        </button>
+        <div className="container">
+          <Letter sentences={sentences} title={"This is the title"} />
+        </div>
+        <div className="controls">
+          <button
+            onClick={() => this.goToNextWord()}
+            disabled={this.state.puzzle}
+          >
+            Next Word
+          </button>
+        </div>
       </div>
     );
   }

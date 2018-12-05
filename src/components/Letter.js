@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import Sentence from "./Sentence";
+
 export default class Letter extends Component {
   render() {
-    const { sentences } = this.props;
+    const { sentences, title } = this.props;
     return (
-      <div>
-        The letter
+      <div className="letter">
+        <div className="title">
+          <h1>{title}</h1>
+        </div>
         {sentences.map(sentence => (
-          <div className="sentence">
-            {sentence.map(word => (
-              <span className="word">{word.text}</span>
-            ))}
-          </div>
+          <Sentence sentence={sentence} />
         ))}
       </div>
     );
@@ -23,5 +23,6 @@ Letter.defaultProps = {
   sentences: []
 };
 Letter.propTypes = {
+  title: PropTypes.string.isRequired,
   sentences: PropTypes.arrayOf(PropTypes.array)
 };
