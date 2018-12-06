@@ -13,12 +13,13 @@ body {
 
 .controls {
     position: fixed;
-    width: 100%;
     height: 50px;
     padding: 20px;
-    text-align: center;
+    width: 200px;
     bottom: 0px;
-    margin: 0;
+    margin: 0 auto;
+    text-align: center;
+    right: 0px;
 }
 
 .controls button {
