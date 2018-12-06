@@ -1,0 +1,7 @@
+.puzzle {
+
+}
+
+.row .col {
+    display: inline-block;
+}
