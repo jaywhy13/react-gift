@@ -28,7 +28,7 @@ export default class Choices extends Component {
       <div className="choices">
         {choices.map(({ letter, index }) => (
           <div
-            onClick={() => this.handleChoiceSelected({ letter })}
+            onClick={() => this.handleChoiceSelected({ letter, index })}
             className={classNames("choice", {
               disabled: this.isChoiceSelected({ letter, index })
             })}

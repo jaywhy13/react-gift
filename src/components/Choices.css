@@ -6,3 +6,7 @@
     margin: 5px;
     font-size: 26px;
 }
+
+.choice.disabled {
+    opacity: 0.3;
+}
