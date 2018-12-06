@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 
+import PropTypes from "prop-types";
+
+import "./Puzzle.css";
+
 import Choices from "./Choices";
+import Answer from "./Answer";
 
 export default class Puzzle extends Component {
   render() {
-    const { pictures, choices } = this.props;
+    const {
+      pictures,
+      choices,
+      selectedChoices,
+      onChoiceSelected,
+      answerLength
+    } = this.props;
     return (
       <div className="puzzle">
         <div className="pictures">
@@ -25,11 +36,35 @@ export default class Puzzle extends Component {
             </div>
           </div>
         </div>
-        <div className="answer">your answer goes here</div>
+        <div className="answer">
+          <Answer selectedChoices={selectedChoices} length={answerLength} />
+        </div>
         <div className="letters">
-          <Choices choices={choices} />
+          <Choices
+            choices={choices}
+            onChoiceSelected={onChoiceSelected}
+            selectedChoices={selectedChoices}
+          />
         </div>
       </div>
     );
   }
 }
+
+Puzzle.propTypes = {
+  onChoiceSelected: PropTypes.func.isRequired,
+  choices: PropTypes.arrayOf(
+    PropTypes.shape({
+      letter: PropTypes.string.isRequired,
+      disabled: PropTypes.bool.isRequired
+    })
+  ).isRequired,
+  selectedChoices: PropTypes.arrayOf(
+    PropTypes.shape({
+      letter: PropTypes.string.isRequired,
+      disabled: PropTypes.bool.isRequired
+    })
+  ).isRequired,
+  pictures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  answerLength: PropTypes.number.isRequired
+};
