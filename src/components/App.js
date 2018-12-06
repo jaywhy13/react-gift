@@ -61,25 +61,10 @@ class App extends Component {
     });
   }
 
-  isChoiceSelected(choice) {
-    const { selectedChoices } = this.state;
-    return (
-      selectedChoices.find(
-        otherChoice =>
-          otherChoice.index === choice.index &&
-          otherChoice.letter === choice.letter
-      ) !== undefined
-    );
-  }
-
   generateChoices(text) {
     return text.split("").map((letter, index) => ({
       letter,
-      index,
-      disabled: this.isChoiceSelected({
-        letter,
-        index
-      })
+      index
     }));
   }
 
