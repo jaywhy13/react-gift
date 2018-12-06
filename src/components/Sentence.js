@@ -8,8 +8,10 @@ export default class Sentence extends Component {
     const { sentence } = this.props;
     return (
       <div className="sentence">
-        {sentence.map(word => (
-          <span className="word">{word.text}</span>
+        {sentence.map((word, index) => (
+          <span className="word" key={index}>
+            {word.text}
+          </span>
         ))}
       </div>
     );
