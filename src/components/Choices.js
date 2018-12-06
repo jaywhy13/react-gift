@@ -1,14 +1,40 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
+import "./Choices.css";
 
 export default class Choices extends Component {
+  handleChoiceSelected(choice) {
+    const { onChoiceSelected } = this.props;
+    if (!this.isChoiceSelected(choice)) {
+      onChoiceSelected(choice);
+    }
+  }
+
+  isChoiceSelected(choice) {
+    const { selectedChoices } = this.props;
+    return (
+      selectedChoices.find(
+        otherChoice =>
+          otherChoice.index === choice.index &&
+          otherChoice.letter === choice.letter
+      ) !== undefined
+    );
+  }
+
   render() {
     const { choices } = this.props;
-    const letters = choices.split("");
     return (
       <div className="choices">
-        {letters.map(letter => (
-          <span className="choice">{letter}</span>
+        {choices.map(({ letter, index }) => (
+          <div
+            onClick={() => this.handleChoiceSelected({ letter })}
+            className={classNames("choice", {
+              disabled: this.isChoiceSelected({ letter, index })
+            })}
+          >
+            {letter}
+          </div>
         ))}
       </div>
     );
@@ -16,5 +42,18 @@ export default class Choices extends Component {
 }
 
 Choices.propTypes = {
-  choices: PropTypes.instanceOf(PropTypes.string).isRequired
+  choices: PropTypes.arrayOf(
+    PropTypes.shape({
+      letter: PropTypes.string.isRequired,
+      disabled: PropTypes.bool.isRequired
+    })
+  ).isRequired,
+  selectedChoices: PropTypes.arrayOf(
+    PropTypes.shape({
+      letter: PropTypes.string.isRequired,
+      disabled: PropTypes.bool.isRequired
+    })
+  ).isRequired,
+
+  onChoiceSelected: PropTypes.func.isRequired
 };
