@@ -3,19 +3,28 @@ import React, { Component } from "react";
 import Letter from "./Letter";
 import "./App.css";
 
-import { getSentences, getNextWord } from "../api";
+import { getSentences, getWordAfter } from "../api";
+import { getPuzzle, isPuzzle, isPuzzleSolved } from "../puzzles";
+import Puzzle from "./Puzzle";
 
 class App extends Component {
   state = {
-    sentences: []
+    sentences: [],
+    choices: [],
+    selectedChoices: [],
+    puzzle: null,
+    currentSentence: 0,
+    currentWord: 0,
+    answer: ""
   };
 
   componentDidMount() {
-    this.setState({ sentences: getSentences() });
+    const { currentSentence, currentWord } = this.state;
+    this.setState({ sentences: getSentences(currentSentence, currentWord) });
   }
 
   render() {
-    const { sentences } = this.state;
+    const { sentences, puzzle, choices, selectedChoices, answer } = this.state;
     return (
       <div className="App">
         <div className="container">
@@ -29,14 +38,85 @@ class App extends Component {
             Next Word
           </button>
         </div>
+        {puzzle ? (
+          <Puzzle
+            onChoiceSelected={this.onChoiceSelected.bind(this)}
+            choices={choices}
+            selectedChoices={selectedChoices}
+            pictures={puzzle.pictures}
+            answerLength={answer.length}
+          />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
 
-  goToNextWord() {
-    getNextWord();
+  onChoiceSelected(choice) {
+    console.log("Adding selected choice", choice);
     this.setState({
-      sentences: getSentences()
+      selectedChoices: [...this.state.selectedChoices, choice],
+      choices: this.generateChoices(this.state.answer)
+    });
+  }
+
+  isChoiceSelected(choice) {
+    const { selectedChoices } = this.state;
+    return (
+      selectedChoices.find(
+        otherChoice =>
+          otherChoice.index === choice.index &&
+          otherChoice.letter === choice.letter
+      ) !== undefined
+    );
+  }
+
+  generateChoices(text) {
+    return text.split("").map((letter, index) => ({
+      letter,
+      index,
+      disabled: this.isChoiceSelected({
+        letter,
+        index
+      })
+    }));
+  }
+
+  goToNextWord() {
+    // Get the next word
+    const { currentSentence, currentWord } = this.state;
+    const nextWord = getWordAfter(currentSentence, currentWord);
+    console.log("Next word is", nextWord);
+    if (!nextWord) {
+      return;
+    }
+
+    const puzzle = getPuzzle(nextWord.sentence, nextWord.index);
+    console.log("puzzle = ", puzzle);
+    if (puzzle && !isPuzzleSolved(nextWord.sentence, nextWord.index)) {
+      const choices = this.generateChoices(nextWord.text);
+      this.setState({
+        puzzle,
+        choices,
+        selectedChoices: [],
+        answer: nextWord.text
+      });
+      return;
+    } else {
+      this.setState({
+        puzzle: null
+      });
+    }
+
+    const sentences = getSentences(nextWord.sentence, nextWord.index);
+    const lastSentence = sentences[sentences.length - 1];
+    console.log("Updating state", sentences, lastSentence);
+    this.setState({
+      sentences,
+      puzzle: null,
+      currentSentence: nextWord.sentence,
+      currentWord: nextWord.index
     });
   }
 }
