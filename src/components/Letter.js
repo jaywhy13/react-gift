@@ -11,8 +11,8 @@ export default class Letter extends Component {
         <div className="title">
           <h1>{title}</h1>
         </div>
-        {sentences.map(sentence => (
-          <Sentence sentence={sentence} />
+        {sentences.map((sentence, index) => (
+          <Sentence sentence={sentence} key={index} />
         ))}
       </div>
     );
