@@ -16,6 +16,7 @@ export default class Choices extends Component {
     return (
       selectedChoices.find(
         otherChoice =>
+          otherChoice &&
           otherChoice.index === choice.index &&
           otherChoice.letter === choice.letter
       ) !== undefined
