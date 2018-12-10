@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import "./Sentence.css";
 
 import PropTypes from "prop-types";
+import Word from "./Word";
 
 export default class Sentence extends Component {
   render() {
-    const { sentence } = this.props;
+    const { sentence, punctuation } = this.props;
     return (
       <div className="sentence">
         {sentence.map((word, index) => (
-          <span className="word" key={index}>
-            {word.text}
-          </span>
+          <Word index={index}>{word.text}</Word>
         ))}
+        {punctuation}
       </div>
     );
   }
