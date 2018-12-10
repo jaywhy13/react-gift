@@ -13,14 +13,12 @@ const makeSentences = sentences => {
     for (let j = 0; j < words.length; j += 1) {
       formattedSentence.push(makeWord(i, j, words[j]));
     }
-    console.log(formattedSentence);
     formattedSentences.push(formattedSentence);
   }
   return formattedSentences;
 };
 
 const SENTENCES = makeSentences(RAW_SENTENCES);
-console.log("SENTENCES", SENTENCES);
 
 export const getWordAfter = (currentSentence, currentWord) => {
   if (currentSentence < SENTENCES.length) {
