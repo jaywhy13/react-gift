@@ -8,16 +8,39 @@ import Choices from "./Choices";
 import Answer from "./Answer";
 
 export default class Puzzle extends Component {
+  renderAnswer() {
+    const {
+      selectedChoices,
+      onChoiceDeselected,
+      correct,
+      incorrect
+    } = this.props;
+    const answer = selectedChoices.map(choice => (choice ? choice.letter : ""));
+    return (
+      <div className="answer">
+        <Answer
+          answer={answer}
+          correct={correct}
+          incorrect={incorrect}
+          onClick={(letter, index) => {
+            if (letter) onChoiceDeselected(selectedChoices[index]);
+          }}
+        />
+      </div>
+    );
+  }
+
   render() {
     const {
       pictures,
       choices,
       selectedChoices,
       onChoiceSelected,
-      answerLength
+      onClosePuzzle
     } = this.props;
     return (
       <div className="puzzle">
+        <span onClick={() => onClosePuzzle()}>Close</span>
         <div className="pictures">
           <div className="row">
             <div className="col">
@@ -36,9 +59,7 @@ export default class Puzzle extends Component {
             </div>
           </div>
         </div>
-        <div className="answer">
-          <Answer selectedChoices={selectedChoices} length={answerLength} />
-        </div>
+        {this.renderAnswer()}
         <div className="letters">
           <Choices
             choices={choices}
@@ -53,6 +74,7 @@ export default class Puzzle extends Component {
 
 Puzzle.propTypes = {
   onChoiceSelected: PropTypes.func.isRequired,
+  onChoiceDeselected: PropTypes.func.isRequired,
   choices: PropTypes.arrayOf(
     PropTypes.shape({
       letter: PropTypes.string.isRequired,
@@ -65,6 +87,5 @@ Puzzle.propTypes = {
       disabled: PropTypes.bool.isRequired
     })
   ).isRequired,
-  pictures: PropTypes.arrayOf(PropTypes.string).isRequired,
-  answerLength: PropTypes.number.isRequired
+  pictures: PropTypes.arrayOf(PropTypes.string).isRequired
 };
