@@ -182,5 +182,14 @@ export default {
     "https://www.hopkinsmedicine.org/sebin/j/t/doctor_patient_nurse_640.jpg",
 
   BABY_SLEEPING:
-    "https://cdn.newsapi.com.au/image/v1/d44ce2031d9b6fc82741be1ea7197221"
+    "https://cdn.newsapi.com.au/image/v1/d44ce2031d9b6fc82741be1ea7197221",
+
+  CHESS_GAME:
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2q1T9ZQveXcxQ6iS0L0wfwr58ZqbUW6MBkiG1gmtrquUiEW15pA",
+
+  CHILDREN_PLAYING_CHECKERS:
+    "https://www.livetheadventureletter.com/wp-content/uploads/2015/04/checker.jpg",
+
+  DEBATE:
+    "https://assetsds.cdnedge.bluemix.net/sites/default/files/styles/big_2/public/feature/images/debating.jpg?itok=ffwOxvrV"
 };
