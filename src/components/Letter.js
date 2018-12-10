@@ -5,14 +5,18 @@ import Sentence from "./Sentence";
 
 export default class Letter extends Component {
   render() {
-    const { sentences, title } = this.props;
+    const { sentences, title, punctuation } = this.props;
     return (
       <div className="letter">
         <div className="title">
           <h1>{title}</h1>
         </div>
         {sentences.map((sentence, index) => (
-          <Sentence sentence={sentence} key={index} />
+          <Sentence
+            sentence={sentence}
+            key={index}
+            punctuation={index === sentences.length - 1 ? punctuation : null}
+          />
         ))}
       </div>
     );
