@@ -14,11 +14,3 @@ export const getPuzzle = (sentence, word) =>
 
 export const isPuzzle = (sentence, word) =>
   getPuzzle(sentence, word) !== undefined;
-
-export const isPuzzleSolved = (sentence, word) => {
-  const puzzle = getPuzzle(sentence, word);
-  if (puzzle) {
-    return puzzle.solved;
-  }
-  return true;
-};
