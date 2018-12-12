@@ -1,21 +1,20 @@
 .answer-letter {
-    padding: 8px 16px;
-    border: 2px solid grey;
-    margin: 8px;
-    display: inline-block;
-    height: 24px;
-    width: 24px;
-    text-align: center;
+  padding: 8px 16px;
+  border: 2px solid grey;
+  margin: 8px;
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  text-align: center;
 }
 
 .answer {
-    display: flex;
 }
 
 .answer.correct {
-    background-color: green;
+  background-color: green;
 }
 
 .answer.incorrect {
-    background-color: red;
+  background-color: red;
 }

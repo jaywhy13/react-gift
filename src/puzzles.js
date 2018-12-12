@@ -5,7 +5,12 @@ const PUZZLES = [
     sentence: 0,
     word: 3,
     solved: false,
-    pictures: [images.SAMURAI, images.SAMURAI, images.SAMURAI, images.SAMURAI]
+    pictures: [
+      images.TROPICAL_ISLAND,
+      images.SLICE_OF_CHOCOLATE_CAKE,
+      images.SAMURAI,
+      images.PLATE_AND_UTENSILS
+    ]
   }
 ];
 

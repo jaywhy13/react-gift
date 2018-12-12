@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SweetAlert from "sweetalert-react";
 import { renderToStaticMarkup } from "react-dom/server";
 import "sweetalert/dist/sweetalert.css";
 
@@ -7,6 +6,8 @@ import Letter from "./Letter";
 import "./App.css";
 import randomLetter from "random-letter";
 import shuffle from "shuffle-array";
+
+import { Modal, Grid, Row, Col, Button } from "react-bootstrap";
 
 import { getSentences, getWordAfter } from "../api";
 import { getPuzzle, isPuzzle } from "../puzzles";
@@ -57,38 +58,56 @@ class App extends Component {
         answerLength={answer.length}
       />
     );
-    return (
-      <SweetAlert
-        show={visible}
-        title="A puzzle"
-        html
-        width="800px"
-        text={renderToStaticMarkup(puzzleElement)}
-      />
+
+    const modal = (
+      <Modal show={visible} onHide={() => this.onClosePuzzle()}>
+        <Modal.Body>{puzzleElement}</Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.onClosePuzzle.bind(this)}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     );
+    return modal;
   }
 
   render() {
-    const { sentences, puzzle, choices, selectedChoices, answer } = this.state;
+    const { puzzle } = this.state;
     return (
       <div className="App">
-        <div className="container">
-          <Letter
-            sentences={sentences}
-            title={"This is the title"}
-            punctuation={this.renderPunctuation()}
-          />
-        </div>
-        <div className="controls">
-          <button
-            onClick={() => this.goToNextWord()}
-            disabled={puzzle && !this.isPuzzleSolved(puzzle)}
-          >
-            Next Word
-          </button>
-        </div>
-        {this.renderPuzzle()}
+        <Grid>
+          <Row>
+            <Col>
+              <div className="container">
+                {this.renderLetter()}
+                {this.renderPuzzle()}
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className="controls">
+                <button
+                  onClick={() => this.goToNextWord()}
+                  disabled={puzzle && !this.isPuzzleSolved(puzzle)}
+                >
+                  Next Word
+                </button>
+              </div>
+            </Col>
+          </Row>
+        </Grid>
       </div>
+    );
+  }
+
+  renderLetter() {
+    const { sentences } = this.state;
+    return (
+      <Letter
+        sentences={sentences}
+        title={"This is the title"}
+        punctuation={this.renderPunctuation()}
+      />
     );
   }
 

@@ -10,7 +10,9 @@ export default class Sentence extends Component {
     return (
       <div className="sentence">
         {sentence.map((word, index) => (
-          <Word index={index}>{word.text}</Word>
+          <Word index={index} key={index}>
+            {word.text}
+          </Word>
         ))}
         {punctuation}
       </div>

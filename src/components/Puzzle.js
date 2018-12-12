@@ -4,10 +4,16 @@ import PropTypes from "prop-types";
 
 import "./Puzzle.css";
 
+import classNames from "classnames";
+
 import Choices from "./Choices";
 import Answer from "./Answer";
+import { Grid, Row, Col } from "react-bootstrap";
 
 export default class Puzzle extends Component {
+  state = {
+    zoomedImage: null
+  };
   renderAnswer() {
     const {
       selectedChoices,
@@ -17,7 +23,7 @@ export default class Puzzle extends Component {
     } = this.props;
     const answer = selectedChoices.map(choice => (choice ? choice.letter : ""));
     return (
-      <div className="answer">
+      <div className="user-answer">
         <Answer
           answer={answer}
           correct={correct}
@@ -30,43 +36,89 @@ export default class Puzzle extends Component {
     );
   }
 
-  render() {
-    const {
-      pictures,
-      choices,
-      selectedChoices,
-      onChoiceSelected,
-      onClosePuzzle
-    } = this.props;
+  renderPicture(index, zoomed = false) {
+    const { pictures } = this.props;
     return (
-      <div className="puzzle">
-        <span onClick={() => onClosePuzzle()}>Close</span>
-        <div className="pictures">
-          <div className="row">
-            <div className="col">
-              <img src={pictures[0]} alt="" />
-            </div>
-            <div className="col">
-              <img src={pictures[1]} alt="" />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              <img src={pictures[2]} alt="" />
-            </div>
-            <div className="col">
-              <img src={pictures[3]} alt="" />
-            </div>
-          </div>
-        </div>
-        {this.renderAnswer()}
-        <div className="letters">
-          <Choices
-            choices={choices}
-            onChoiceSelected={onChoiceSelected}
-            selectedChoices={selectedChoices}
+      <Col lg={zoomed ? 12 : 6}>
+        <div
+          className={classNames("picture", { zoomed })}
+          style={{
+            minHeight: "500px"
+          }}
+        >
+          <img
+            src={pictures[index]}
+            alt="Pic 0"
+            onClick={() => (zoomed ? this.zoomOut() : this.zoomImage(index))}
           />
         </div>
+      </Col>
+    );
+  }
+
+  zoomImage(index) {
+    this.setState({
+      zoomedImage: index
+    });
+  }
+
+  zoomOut() {
+    this.setState({
+      zoomedImage: null
+    });
+  }
+
+  renderPictures() {
+    const { pictures } = this.props;
+    const { zoomedImage } = this.state;
+    if (zoomedImage !== null) {
+      return (
+        <div className="pictures">
+          <Row>{this.renderPicture(zoomedImage, true)}</Row>
+        </div>
+      );
+    }
+    return (
+      <div className="pictures">
+        <Row>
+          {this.renderPicture(0)}
+          {this.renderPicture(1)}
+        </Row>
+        <Row>
+          {this.renderPicture(2)}
+          {this.renderPicture(3)}
+        </Row>
+      </div>
+    );
+  }
+
+  renderLetters() {
+    const { choices, selectedChoices, onChoiceSelected } = this.props;
+    return (
+      <div className="letters">
+        <Choices
+          choices={choices}
+          onChoiceSelected={onChoiceSelected}
+          selectedChoices={selectedChoices}
+        />
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="puzzle">
+        <Grid>
+          <Row>
+            <Col>{this.renderPictures()}</Col>
+          </Row>
+          <Row>
+            <Col>{this.renderAnswer()}</Col>
+          </Row>
+          <Row>
+            <Col>{this.renderLetters()}</Col>
+          </Row>
+        </Grid>
       </div>
     );
   }
