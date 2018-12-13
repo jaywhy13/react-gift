@@ -29,7 +29,7 @@ export default class Puzzle extends Component {
           correct={correct}
           incorrect={incorrect}
           onClick={(letter, index) => {
-            if (letter) onChoiceDeselected(selectedChoices[index]);
+            if (letter && !correct) onChoiceDeselected(selectedChoices[index]);
           }}
         />
       </div>
@@ -39,7 +39,7 @@ export default class Puzzle extends Component {
   renderPicture(index, zoomed = false) {
     const { pictures } = this.props;
     return (
-      <Col lg={zoomed ? 12 : 6}>
+      <Col sm={zoomed ? 12 : 6}>
         <div
           className={classNames("picture", { zoomed })}
           style={{
@@ -90,13 +90,14 @@ export default class Puzzle extends Component {
   }
 
   renderChoices() {
-    const { choices, selectedChoices, onChoiceSelected } = this.props;
+    const { choices, selectedChoices, onChoiceSelected, correct } = this.props;
     return (
       <div className="letters">
         <Choices
           choices={choices}
           onChoiceSelected={onChoiceSelected}
           selectedChoices={selectedChoices}
+          disabled={correct}
         />
       </div>
     );
@@ -131,8 +132,7 @@ Puzzle.propTypes = {
   ).isRequired,
   selectedChoices: PropTypes.arrayOf(
     PropTypes.shape({
-      letter: PropTypes.string.isRequired,
-      disabled: PropTypes.bool.isRequired
+      letter: PropTypes.string.isRequired
     })
   ).isRequired,
   pictures: PropTypes.arrayOf(PropTypes.string).isRequired

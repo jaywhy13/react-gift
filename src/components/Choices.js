@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import "./Choices.css";
+import { Col } from "react-bootstrap";
 
 export default class Choices extends Component {
   handleChoiceSelected(choice) {
-    const { onChoiceSelected } = this.props;
-    if (!this.isChoiceSelected(choice)) {
+    const { onChoiceSelected, disabled } = this.props;
+    if (!this.isChoiceSelected(choice) || disabled) {
       onChoiceSelected(choice);
     }
   }
@@ -25,19 +26,36 @@ export default class Choices extends Component {
 
   render() {
     const { choices } = this.props;
+    const firstRow = choices.slice(0, 6);
+    const lastRow = choices.slice(6);
     return (
       <div className="choices">
-        {choices.map(({ letter, index }) => (
-          <div
-            key={index}
-            onClick={() => this.handleChoiceSelected({ letter, index })}
-            className={classNames("choice", {
-              disabled: this.isChoiceSelected({ letter, index })
-            })}
-          >
-            {letter}
-          </div>
-        ))}
+        <Col xs={12}>
+          {firstRow.map(({ letter, index }) => (
+            <div
+              key={index}
+              onClick={() => this.handleChoiceSelected({ letter, index })}
+              className={classNames("choice", {
+                disabled: this.isChoiceSelected({ letter, index })
+              })}
+            >
+              {letter}
+            </div>
+          ))}
+        </Col>
+        <Col xs={12}>
+          {lastRow.map(({ letter, index }) => (
+            <div
+              key={index}
+              onClick={() => this.handleChoiceSelected({ letter, index })}
+              className={classNames("choice", {
+                disabled: this.isChoiceSelected({ letter, index })
+              })}
+            >
+              {letter}
+            </div>
+          ))}
+        </Col>
       </div>
     );
   }
@@ -55,5 +73,6 @@ Choices.propTypes = {
     })
   ).isRequired,
 
-  onChoiceSelected: PropTypes.func.isRequired
+  onChoiceSelected: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired
 };

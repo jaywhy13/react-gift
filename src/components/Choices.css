@@ -5,6 +5,9 @@
   border-radius: 12px;
   margin: 5px;
   font-size: 26px;
+  width: 64px;
+  text-align: center;
+  height: 64px;
 }
 
 .choice.disabled {
