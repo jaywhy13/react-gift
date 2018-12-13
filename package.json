@@ -11,8 +11,7 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
-    "shuffle-array": "^1.0.1",
-    "sweetalert-react": "^0.4.11"
+    "shuffle-array": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
