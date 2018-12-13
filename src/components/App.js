@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import "sweetalert/dist/sweetalert.css";
 
 import Letter from "./Letter";
 import "./App.css";
