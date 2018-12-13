@@ -110,7 +110,7 @@ class App extends Component {
               <div className="controls">
                 <Button
                   onClick={() => this.goToNextWord()}
-                  disabled={puzzle && !this.isPuzzleSolved(puzzle)}
+                  disabled={puzzle && !this.isPuzzleSolved(puzzle.answer)}
                 >
                   Next Word
                 </Button>
@@ -135,7 +135,7 @@ class App extends Component {
 
   renderPunctuation() {
     const { puzzle } = this.state;
-    if (puzzle && !this.isPuzzleSolved(puzzle)) {
+    if (puzzle && !this.isPuzzleSolved(puzzle.answer)) {
       return (
         <div className="punctuation">
           <img
@@ -195,7 +195,7 @@ class App extends Component {
       if (correct) {
         this.setState(
           {
-            solvedPuzzles: [puzzle, ...solvedPuzzles]
+            solvedPuzzles: [answer, ...solvedPuzzles]
           },
           () => {
             this.goToNextWord();
@@ -271,13 +271,9 @@ class App extends Component {
     }));
   }
 
-  isPuzzleSolved({ word, sentence }) {
+  isPuzzleSolved(text) {
     const { solvedPuzzles } = this.state;
-    return (
-      solvedPuzzles.find(
-        puzzle => sentence === puzzle.sentence && word === puzzle.word
-      ) !== undefined
-    );
+    return solvedPuzzles.indexOf(text.toUpperCase()) > -1;
   }
 
   goToNextWord() {
@@ -288,8 +284,9 @@ class App extends Component {
       return;
     }
 
-    const puzzle = getPuzzle(nextWord.sentence, nextWord.index);
-    if (puzzle && !this.isPuzzleSolved(puzzle)) {
+    const puzzle = getPuzzle(nextWord.text);
+    console.log("Next word is ", nextWord.text, "is it a puzzle?", puzzle);
+    if (puzzle && !this.isPuzzleSolved(nextWord.text)) {
       const answer = nextWord.text.toUpperCase();
       const choices = this.generateChoices(answer);
       this.setState(

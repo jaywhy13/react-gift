@@ -1,21 +1,16 @@
 import images from "./images";
 
-const PUZZLES = [
-  {
-    sentence: 0,
-    word: 3,
-    solved: false,
+const PUZZLES = {
+  mature: {
     pictures: [
-      images.TROPICAL_ISLAND,
-      images.SLICE_OF_CHOCOLATE_CAKE,
-      images.SAMURAI,
-      images.PLATE_AND_UTENSILS
+      images.GOLDEN_GIRLS,
+      images.OLD_AGE_HOME,
+      images.FIFTY_SHADES,
+      images.AMERICAN_PIE
     ]
   }
-];
+};
 
-export const getPuzzle = (sentence, word) =>
-  PUZZLES.find(puzzle => puzzle.sentence === sentence && puzzle.word === word);
+export const getPuzzle = text => PUZZLES[text];
 
-export const isPuzzle = (sentence, word) =>
-  getPuzzle(sentence, word) !== undefined;
+export const isPuzzle = text => getPuzzle(text) !== undefined;
