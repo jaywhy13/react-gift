@@ -1,6 +1,4 @@
 export default {
-  SAMURAI:
-    "https://vignette.wikia.nocookie.net/talmanwha/images/2/2a/Blog_-_Imae.png/revision/latest?cb=20170706104125",
   GOLDEN_GIRLS:
     "https://s.abcnews.com/images/Entertainment/golden-girls-group-h-getty-gty-jc-180726_hpMain_16x9_992.jpg",
   OLD_AGE_HOME:
