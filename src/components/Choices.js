@@ -29,6 +29,7 @@ export default class Choices extends Component {
       <div className="choices">
         {choices.map(({ letter, index }) => (
           <div
+            key={index}
             onClick={() => this.handleChoiceSelected({ letter, index })}
             className={classNames("choice", {
               disabled: this.isChoiceSelected({ letter, index })
@@ -45,14 +46,12 @@ export default class Choices extends Component {
 Choices.propTypes = {
   choices: PropTypes.arrayOf(
     PropTypes.shape({
-      letter: PropTypes.string.isRequired,
-      disabled: PropTypes.bool.isRequired
+      letter: PropTypes.string.isRequired
     })
   ).isRequired,
   selectedChoices: PropTypes.arrayOf(
     PropTypes.shape({
-      letter: PropTypes.string.isRequired,
-      disabled: PropTypes.bool.isRequired
+      letter: PropTypes.string.isRequired
     })
   ).isRequired,
 

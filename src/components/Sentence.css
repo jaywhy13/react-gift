@@ -1,5 +1,7 @@
 .word {
-    padding: 5px;
-    font-size: 35px;
-    font-family: "Grand Hotel"
+  padding: 5px;
+  font-size: 65px;
+  font-family: "Grand Hotel";
+  text-shadow: 4px 5px 2px #474747;
+  margin-right: 4px;
 }

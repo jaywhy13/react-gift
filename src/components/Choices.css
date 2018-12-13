@@ -1,12 +1,12 @@
 .choice {
-    display: inline-block;
-    padding: 8px 15px;
-    border: 2px solid grey;
-    border-radius: 4px;
-    margin: 5px;
-    font-size: 26px;
+  display: inline-block;
+  padding: 8px 15px;
+  border: 6px solid #4f4b4b;
+  border-radius: 12px;
+  margin: 5px;
+  font-size: 26px;
 }
 
 .choice.disabled {
-    opacity: 0.3;
+  opacity: 0.3;
 }

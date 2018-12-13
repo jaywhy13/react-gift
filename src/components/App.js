@@ -14,23 +14,46 @@ import { getPuzzle, isPuzzle } from "../puzzles";
 import Puzzle from "./Puzzle";
 import Word from "./Word";
 
+import { getObject, saveObject } from "../storage";
+
 const TOTAL_CHOICES = 12;
+const SAVED_STATE_KEY = "react-gift-state";
+
+const DEFAULT_STATE = {
+  // Navigation
+  sentences: [],
+  currentSentence: 0,
+  currentWord: 0,
+
+  // Puzzle
+  puzzle: null,
+  solvedPuzzles: []
+};
 
 class App extends Component {
   state = {
-    // Navigation
-    sentences: [],
-    currentSentence: 0,
-    currentWord: 0,
-
-    // Puzzle
-    puzzle: null,
-    solvedPuzzles: []
+    ...DEFAULT_STATE
   };
 
   componentDidMount() {
-    const { currentSentence, currentWord } = this.state;
-    this.setState({ sentences: getSentences(currentSentence, currentWord) });
+    const serializedState = getObject(SAVED_STATE_KEY);
+    console.log("Serialized state", serializedState);
+    if (serializedState !== null) {
+      this.setState({
+        ...DEFAULT_STATE,
+        ...serializedState
+      });
+    } else {
+      const { currentSentence, currentWord } = this.state;
+      this.setState({
+        ...DEFAULT_STATE,
+        sentences: getSentences(currentSentence, currentWord)
+      });
+    }
+  }
+
+  saveState() {
+    saveObject(SAVED_STATE_KEY, this.state);
   }
 
   renderPuzzle() {
@@ -86,12 +109,12 @@ class App extends Component {
           <Row>
             <Col>
               <div className="controls">
-                <button
+                <Button
                   onClick={() => this.goToNextWord()}
                   disabled={puzzle && !this.isPuzzleSolved(puzzle)}
                 >
                   Next Word
-                </button>
+                </Button>
               </div>
             </Col>
           </Row>
@@ -115,13 +138,14 @@ class App extends Component {
     const { puzzle } = this.state;
     if (puzzle && !this.isPuzzleSolved(puzzle)) {
       return (
-        <Word
-          onClick={() => {
-            this.openPuzzle();
-          }}
-        >
-          ....
-        </Word>
+        <div className="punctuation">
+          <img
+            src="/images/4picslogo.png"
+            onClick={() => {
+              this.openPuzzle();
+            }}
+          />
+        </div>
       );
     }
   }
@@ -132,11 +156,13 @@ class App extends Component {
     const updatedChoices = [...puzzle.selectedChoices];
     for (let index = 0; index < updatedChoices.length; index++) {
       const element = updatedChoices[index];
-      if (element === undefined) {
+      if (element === undefined || element === null) {
         updatedChoices[index] = choice;
         break;
       }
     }
+
+    console.log("Updating selectedChoices", updatedChoices);
 
     this.setState(
       {
@@ -209,12 +235,17 @@ class App extends Component {
   onClosePuzzle() {
     if (!this.state.puzzle) return;
     const { puzzle } = this.state;
-    this.setState({
-      puzzle: {
-        ...puzzle,
-        visible: false
+    this.setState(
+      {
+        puzzle: {
+          ...puzzle,
+          visible: false
+        }
+      },
+      () => {
+        this.saveState();
       }
-    });
+    );
   }
 
   openPuzzle() {
@@ -262,29 +293,39 @@ class App extends Component {
     if (puzzle && !this.isPuzzleSolved(puzzle)) {
       const answer = nextWord.text.toUpperCase();
       const choices = this.generateChoices(answer);
-      this.setState({
-        puzzle: {
-          pictures: puzzle.pictures,
-          word: puzzle.word,
-          sentence: puzzle.sentence,
-          choices,
-          selectedChoices: new Array(answer.length),
-          answer,
-          incorrect: false,
-          correct: false,
-          visible: true
+      this.setState(
+        {
+          puzzle: {
+            pictures: puzzle.pictures,
+            word: puzzle.word,
+            sentence: puzzle.sentence,
+            choices,
+            selectedChoices: new Array(answer.length),
+            answer,
+            incorrect: false,
+            correct: false,
+            visible: true
+          }
+        },
+        () => {
+          this.saveState();
         }
-      });
+      );
       return;
     }
 
     const sentences = getSentences(nextWord.sentence, nextWord.index);
     const lastSentence = sentences[sentences.length - 1];
-    this.setState({
-      sentences,
-      currentSentence: nextWord.sentence,
-      currentWord: nextWord.index
-    });
+    this.setState(
+      {
+        sentences,
+        currentSentence: nextWord.sentence,
+        currentWord: nextWord.index
+      },
+      () => {
+        this.saveState();
+      }
+    );
   }
 }
 

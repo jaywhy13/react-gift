@@ -13,7 +13,11 @@ export default class Answer extends Component {
     for (let index = 0; index < answer.length; index++) {
       const letter = answer[index] || "";
       letters.push(
-        <span className="answer-letter" onClick={() => onClick(letter, index)}>
+        <span
+          key={index}
+          className="answer-letter"
+          onClick={() => onClick(letter, index)}
+        >
           {letter}
         </span>
       );

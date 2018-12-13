@@ -1,30 +1,39 @@
 body {
-    background-image: url("/images/paper.jpg");
-    background-size: cover;
-    font-family: "Slabo 27px";
+  background-image: url("/images/bridge_walkway.jpg");
+  background-size: cover;
+  font-family: "Slabo 27px";
+  color: white;
 }
 
 .container {
-    width: 70%;
-    max-width: 1200px;
-    margin: 30px auto;
-    text-align: center;
+  width: 70%;
+  max-width: 1200px;
+  margin: 30px auto;
+  text-align: center;
 }
 
-.controls {
-    position: fixed;
-    height: 50px;
-    padding: 20px;
-    width: 200px;
-    bottom: 0px;
-    margin: 0 auto;
-    text-align: center;
-    right: 0px;
+.punctuation {
+  display: inline-block;
 }
 
-.controls button {
-    font-size: 22px;
-    font-family: "Slabo 27px";
-    padding: 14px;
-    border-radius: 10px;
+.punctuation img {
+  width: 48px;
+  margin: 15px;
+  margin-top: -15px;
+  -webkit-transform: rotate(20deg);
+  -ms-transform: rotate(20deg);
+  transform: rotate(20deg);
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.modal-content {
+  background-color: #292525;
+  border-radius: 15px;
+}
+
+.modal-footer {
+  border-top: none;
 }

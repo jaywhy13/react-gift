@@ -9,3 +9,14 @@
   border-radius: 13px;
   margin: 10px;
 }
+
+.modal-dialog {
+  width: 80%;
+  max-width: 1200px;
+}
+
+.picture {
+  border-radius: 15px;
+  border: 10px solid #464242;
+  margin: 15px 0;
+}

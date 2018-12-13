@@ -43,15 +43,12 @@ export default class Puzzle extends Component {
         <div
           className={classNames("picture", { zoomed })}
           style={{
-            minHeight: "500px"
+            minHeight: zoomed ? "500px" : "300px",
+            backgroundImage: `url('${pictures[index]}')`,
+            backgroundSize: "cover"
           }}
-        >
-          <img
-            src={pictures[index]}
-            alt="Pic 0"
-            onClick={() => (zoomed ? this.zoomOut() : this.zoomImage(index))}
-          />
-        </div>
+          onClick={() => (zoomed ? this.zoomOut() : this.zoomImage(index))}
+        />
       </Col>
     );
   }
@@ -92,7 +89,7 @@ export default class Puzzle extends Component {
     );
   }
 
-  renderLetters() {
+  renderChoices() {
     const { choices, selectedChoices, onChoiceSelected } = this.props;
     return (
       <div className="letters">
@@ -116,7 +113,7 @@ export default class Puzzle extends Component {
             <Col>{this.renderAnswer()}</Col>
           </Row>
           <Row>
-            <Col>{this.renderLetters()}</Col>
+            <Col>{this.renderChoices()}</Col>
           </Row>
         </Grid>
       </div>
@@ -129,8 +126,7 @@ Puzzle.propTypes = {
   onChoiceDeselected: PropTypes.func.isRequired,
   choices: PropTypes.arrayOf(
     PropTypes.shape({
-      letter: PropTypes.string.isRequired,
-      disabled: PropTypes.bool.isRequired
+      letter: PropTypes.string.isRequired
     })
   ).isRequired,
   selectedChoices: PropTypes.arrayOf(
