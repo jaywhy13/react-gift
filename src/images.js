@@ -102,7 +102,7 @@ export default {
   CHOCOLATE_CAKE:
     "https://az826390.vo.msecnd.net/cdn/media/home/inspiring_recipes/recipes/new_-_c/couronne-gourmande-chocolat-noir-1160x650-bs007437-pub-67290-01.ashx?la=en&mw=1160&w=1160&hash=9B81EF909280D8073F0B4DDF77C88E33A3DD72DE",
   PASTURE:
-    "https://cdn.pixabay.com/photo/2017/10/08/01/39/open-fields-2828596_960_720.jpg",
+    "https://wordhavering.files.wordpress.com/2013/03/green-pastures.jpg",
   OLD_CAR: "https://timelimo.com/wp-content/uploads/2011/03/1948-Bently.jpg",
   MODEL_GIRL:
     "https://scattergorieslists.com/wp-content/uploads/2017/07/green-eyes.jpg",
@@ -149,6 +149,9 @@ export default {
   PEOPLE_RUNNING_AWAY:
     "http://pix.avaxnews.com/avaxnews/4e/bb/0002bb4e_medium.jpeg",
 
+  BLUE_HEART_RATE_MONITOR:
+    "https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/wczfl6k/blue-heart-monitor-hd-with-alpha_nk9f3bwml__F0000.png",
+
   PERCENTAGE_GOING_UP:
     "https://www.vancouverrealestatepodcast.com/wp-content/uploads/2018/10/interest-rates-e1541025967190.jpg",
 
@@ -189,5 +192,151 @@ export default {
     "https://www.livetheadventureletter.com/wp-content/uploads/2015/04/checker.jpg",
 
   DEBATE:
-    "https://assetsds.cdnedge.bluemix.net/sites/default/files/styles/big_2/public/feature/images/debating.jpg?itok=ffwOxvrV"
+    "https://assetsds.cdnedge.bluemix.net/sites/default/files/styles/big_2/public/feature/images/debating.jpg?itok=ffwOxvrV",
+
+  GUY_HOLDING_CHOR_ON_GUITAR:
+    "https://www.guitarplayer.com/.image/t_share/MTUxNDE4MTAwMjkxNjc1MzY2/image-placeholder-title.jpg",
+  GUY_HOLDING_CHORD_ON_PIANO:
+    "https://classicalmel.files.wordpress.com/2015/12/20151206_131152_resized.jpg",
+  DOCTORS_IN_SURGERY: "https://pbs.twimg.com/media/C-Mhw5uW0AAvhHr.jpg",
+  FOOT_ON_SURF_BOARD:
+    "http://cdn1.theinertia.com/wp-content/uploads/2015/08/Foot-Malibu-photo-Cyrus-Sutton-1200x695.png",
+  // journey
+  BUS_ON_LONELY_ROAD:
+    "https://cdn-images-1.medium.com/max/2000/1*HyeK5kD69o1EztR9A-WSzA.jpeg",
+  LADIES_ON_MOUNTAIN_TOP:
+    "https://www.theroadtrip.co.nz/wp-content/uploads/2018/11/the-road-trip-oz.jpg",
+  GIRL_WALKING_WITH_BAGPACK:
+    "https://i.pinimg.com/originals/b2/5b/2a/b25b2a404106f6066e8488cff63e1389.jpg",
+  FOREST_TRAIL:
+    "http://freebigpictures.com/wp-content/uploads/2009/09/forest-trail.jpg",
+  LANDSCAPE_WITH_WATER_AND_MOUNTAINS:
+    "http://medias.photodeck.com/936b539a-56b3-4330-aa2d-72a9cc827535/G17365-Pano-FR-01_uxga.jpg",
+  SKIING_DOWN_THE_MOUNTAIN:
+    "https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/Austria/Skiing_st-anton-xlarge.jpg",
+  VOLCANO_ERUPTING:
+    "https://img.purch.com/h/1000/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzAyNy84MzAvb3JpZ2luYWwvcnVzc2lhLXZvbGNhbm8uanBn",
+  ZIP_LINING:
+    "https://www.climbworks.com/wp-content/uploads/2015/05/Jobs_banner.jpg",
+
+  TWO_BABIES_UNDER_SHEET:
+    "https://www.twins.org.au/twins-research/Twins_and_Family/twinsartim-Babies_under_blanket.jpg",
+  GIRL_SPLITTING_ACROSS_TWO_CARS:
+    "https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/S8v_HKLYirmlowrd/videoblocks-russia-novosibirsk-february-28-2017-beautiful-women-made-a-twine-between-two-cars-4k-girl-performs-splits-between-two-cars-split-like-van-damme_ru07chxsx_thumbnail-full01.png",
+
+  NUMBERS:
+    "https://www.chartmedia.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/p/o/poster-number-frieze-colour-1-14.jpg",
+  HELLO_IN_DIFFERENT_LANGUAGES:
+    "https://ied.eu/wp-content/uploads/2017/05/language.jpg",
+
+  // story
+  SLEEPING_BEAUTY: "https://i.ytimg.com/vi/TPLSfL5-Y3g/maxresdefault.jpg",
+  CINDERELLA:
+    "https://amberstudio.com/wp-content/uploads/2017/10/play-cinderella.jpg",
+  FROZEN:
+    "https://cdn.vox-cdn.com/thumbor/SIDDevWC1fD6woWK1-8f78ssgnQ=/103x0:668x424/1200x800/filters:focal(103x0:668x424)/cdn.vox-cdn.com/uploads/chorus_image/image/44267620/frozen_wide.0.0.jpg",
+  SHERK_AND_WIFE:
+    "https://cdn-images-1.medium.com/max/1600/1*6zRpkVumQDRUK5GQ2oY9hQ.jpeg",
+
+  // love
+  COUPLE_EMBRACING:
+    "https://chrispaullai.files.wordpress.com/2015/10/macho-man.jpg",
+  COUPLE_LAUGHING_AND_TALKING:
+    "https://media.apts247.info/ee/ee733a2d7a834e7081c139ce47509a3a/blogs/blog.jpg",
+  MOTHER_EMBRACING_CHILD:
+    "http://3.bp.blogspot.com/-T3Q78sz5wgA/U8C0ui5NiQI/AAAAAAAAA3w/cEdmvqzW3Qs/s1600/IMG_6248.JPG",
+
+  TEA:
+    "https://i.pinimg.com/originals/35/80/45/3580451962c54d42953ad45b21d9b729.jpg",
+  STONE_HEDGE:
+    "https://www.newshub.co.nz/home/world/2018/04/stonehenge-may-have-been-in-place-before-humans-arrived-archaeologist/_jcr_content/par/image.dynimg.1280.q75.jpg/v1523324790601/stonehenge-1120-GettyImages-166725162.jpg",
+  CATHEDRAL:
+    "https://dlsfootsteps.org/wp-content/uploads/2018/01/reims-cathedral-interior.jpg",
+
+  BBC_WORLD:
+    "http://mediad.publicbroadcasting.net/p/ksor/files/styles/x_large/public/201505/bbc-world-service.jpg",
+
+  // mighty
+  SOLDIERS:
+    "https://static1.squarespace.com/static/53b6a142e4b07ea978424efd/t/5bac3e28419202d39186d619/1538014844365/Soldiers.jpg?format=1500w",
+  MIGHTY_MOUSE:
+    "https://sketchok.com/images/articles/01-cartoons/000-va/155/12.jpg",
+
+  BENCHPRESSING:
+    "https://www.muscleandperformance.com/.image/t_share/MTQ1MzY2OTYxMTM0MDUzMTM3/dumbbell-bench-press-opener.jpg",
+
+  BOB_MARLEY:
+    "http://www.eurekafirstchurch.com/wp-content/uploads/2015/06/church-slider-bobmarley.jpg",
+
+  // colleagues
+  GUY_TALKING_TO_LADIES_AT_WORK:
+    "https://completewellbeing.com/wp-content/uploads/2009/06/how-close-should-you-get-to-your-colleague.jpg",
+
+  TWO_GIRLS_TALKING_AT_WORK:
+    "https://www.readersdigest.ca/wp-content/uploads/sites/14/2016/05/7-tricks-for-getting-along-with-colleagues-at-work-1200x900.jpg",
+
+  PEOPLE_STARING_AT_LAPTOP_AT_WORK:
+    "https://www.ivyexec.com/career-advice/wp-content/uploads/2017/11/got-promoted-over-older-colleagues-heres-manage.jpg",
+
+  GUY_PRESENTING_TO_COLLEAGUES:
+    "https://www.peoplechange.nl/wp-content/uploads/2017/05/Presenting.jpg",
+
+  // battle
+
+  GAME_OF_THRONES:
+    "https://cdn.vox-cdn.com/thumbor/I-hVSCyJsNwG0Q05-DISfqZkzO4=/0x0:1920x1080/1200x800/filters:focal(1437x632:1743x938)/cdn.vox-cdn.com/uploads/chorus_image/image/49896373/jonsnow.0.jpg",
+
+  DAVID_AND_GOLIATH:
+    "https://gregsloop.files.wordpress.com/2016/02/david-goliath.jpg?w=1024",
+
+  // fleet
+  SHIP_FROM_ABOVE:
+    "https://dship-carriers.com/wp-content/uploads/dship-fleet-e1535022267812.jpg",
+  SHIPS:
+    "https://fleetintelligence.napa.fi/fleet-intelligence/images/napa-fleet-intelligence-product-image.jpg",
+  TRUCKS:
+    "https://www.canadacartage.com/wp-content/uploads/Fleet-Guide-iStock_000007433980_Full.jpg",
+
+  CRUISE_SHIP:
+    "https://www.costacruise.com/B2C/ResourcesWebRevise/ships/subhome/visual_navi.jpg",
+
+  // defeat
+
+  FOOTBALLERS_CRYING_AFTER_MATCH:
+    "http://danmaycock.com/wp-content/uploads/2015/12/blog-images-lead-TP_347301_FREE_football_05.jpg",
+
+  FOOTBALLER_SHOCKED:
+    "https://static.standard.co.uk/s3fs-public/thumbnails/image/2016/06/27/22/jack_wilshere.jpg",
+
+  LEBRON_DISAPPOINTED:
+    "https://thenypost.files.wordpress.com/2018/01/lebronjames.jpg?quality=90&strip=all&w=1200",
+
+  GIRL_SAD:
+    "https://www.livewellmagazine.org/wp-content/uploads/2016/09/Sad-Lonely-Girl-on-Stairs.jpg",
+
+  // honour
+  POPPY:
+    "https://www.somersetpoppies.co.uk/wp-content/uploads/2018/07/somerset-poppy-product-shot.jpg",
+
+  EMMY:
+    "https://static1.squarespace.com/static/5acd28b9620b857f1f55ea41/5ace1f8888251ba3fcd26e77/5b6347ca70a6ad6ac46a7354/1533235313335/lat-emmystaturette-20170914.jpg?format=2500w",
+
+  FOOTBALLERS_WITH_TROPHY:
+    "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2018/06/14/105273989-GettyImages-452113760.1910x1000.jpg",
+
+  OBAMA_GIVES_MEDAL:
+    "https://www.army.mil/e2/c/images/2014/09/16/362844/original.jpg",
+
+  // impress
+  IMPRESS:
+    "https://successfulsigns.com/wp-content/uploads/2016/07/PrinterR40_withIMP.jpg",
+
+  IMPRESSED_STAMP:
+    "https://c1.staticflickr.com/1/795/40369194335_7c15a7630f_b.jpg",
+
+  GUY_TRYING_TO_IMPRESS_GIRL:
+    "http://www.firstmet.com/dating-blog/wp-content/uploads/2014/08/shutterstock_162886001.jpg",
+
+  GIRL_HUGS_GUY_FOR_FLOWERS:
+    "https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/Stw4Y28Bippgedql/videoblocks-young-man-giving-bunch-of-flowers-to-girl-on-date_sago6scc_thumbnail-full07.png"
 };

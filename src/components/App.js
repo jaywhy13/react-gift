@@ -5,6 +5,7 @@ import Letter from "./Letter";
 import "./App.css";
 import randomLetter from "random-letter";
 import shuffle from "shuffle-array";
+import classNames from "classnames";
 
 import { Modal, Grid, Row, Col, Button } from "react-bootstrap";
 
@@ -17,6 +18,9 @@ import { getObject, saveObject } from "../storage";
 
 const TOTAL_CHOICES = 12;
 const SAVED_STATE_KEY = "react-gift-state";
+const MAX_HINTS = 3;
+const SECONDS_BEFORE_REPLENISHING_HINTS = 30;
+const INTERVAL_TO_CHECK_HINTS = 5;
 
 const DEFAULT_STATE = {
   // Navigation
@@ -26,7 +30,14 @@ const DEFAULT_STATE = {
 
   // Puzzle
   puzzle: null,
-  solvedPuzzles: []
+  solvedPuzzles: [],
+
+  // hints
+  lastHint: null,
+  hintsUsed: 0,
+
+  // Misc
+  resetModalVisible: false
 };
 
 class App extends Component {
@@ -49,6 +60,8 @@ class App extends Component {
         sentences: getSentences(currentSentence, currentWord)
       });
     }
+
+    setInterval(() => this.replenishHints(), 1000 * INTERVAL_TO_CHECK_HINTS);
   }
 
   saveState() {
@@ -85,6 +98,13 @@ class App extends Component {
       <Modal show={visible} onHide={() => this.onClosePuzzle()}>
         <Modal.Body>{puzzleElement}</Modal.Body>
         <Modal.Footer>
+          <img
+            src={"/images/questionssvg-512.png"}
+            width="32px"
+            alt="Hint"
+            className={classNames("hint", { disabled: !this.canGiveHint() })}
+            onClick={this.giveHint.bind(this)}
+          />
           <Button onClick={this.onClosePuzzle.bind(this)}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -96,6 +116,8 @@ class App extends Component {
     const { puzzle } = this.state;
     return (
       <div className="App">
+        {this.renderControls()}
+        {this.renderResetModal()}
         <Grid>
           <Row>
             <Col>
@@ -105,21 +127,132 @@ class App extends Component {
               </div>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <div className="controls">
-                <Button
-                  onClick={() => this.goToNextWord()}
-                  disabled={puzzle && !this.isPuzzleSolved(puzzle.answer)}
-                >
-                  Next Word
-                </Button>
-              </div>
-            </Col>
-          </Row>
         </Grid>
       </div>
     );
+  }
+
+  canGiveHint() {
+    const { hintsUsed } = this.state;
+    return hintsUsed < MAX_HINTS;
+  }
+
+  replenishHints() {
+    console.log("Checking if we should replenish hints");
+    const { lastHint } = this.state;
+    if (lastHint !== null) {
+      const now = new Date();
+      const diffInSeconds = (now.getTime() - lastHint) / 1000;
+      if (diffInSeconds > SECONDS_BEFORE_REPLENISHING_HINTS) {
+        console.log("Replenishing hints");
+        this.setState({
+          hintsUsed: 0,
+          lastHint: null
+        });
+      }
+    }
+  }
+
+  giveHint() {
+    if (!this.canGiveHint()) return;
+    const { puzzle } = this.state;
+    if (puzzle) {
+      const { choices, answer, selectedChoices } = puzzle;
+      if (this.isPuzzleSolved(answer)) {
+        return;
+      }
+      let randomSelectedIndex = parseInt(
+        Math.random() * selectedChoices.length
+      );
+      do {
+        randomSelectedIndex = parseInt(Math.random() * selectedChoices.length);
+        console.log("Looking for a random index");
+      } while (
+        selectedChoices[randomSelectedIndex] !== null &&
+        selectedChoices[randomSelectedIndex] !== undefined
+      );
+      if (
+        selectedChoices[randomSelectedIndex] === null ||
+        selectedChoices[randomSelectedIndex] === undefined
+      ) {
+        console.log(randomSelectedIndex, "is null");
+        const letterAtIndex = answer.charAt(randomSelectedIndex);
+        console.log("Will find a choice for", letterAtIndex);
+        for (let i = 0; i < choices.length; i++) {
+          // Find the first unselected choice that matches
+          let candidateChoice = choices[i];
+          if (candidateChoice.letter === letterAtIndex) {
+            console.log("Gonna select", candidateChoice);
+            this.onChoiceSelected(candidateChoice, randomSelectedIndex);
+            this.setState(({ hintsUsed }) => {
+              return {
+                hintsUsed: hintsUsed + 1,
+                lastHint: new Date().getTime()
+              };
+            });
+            break;
+          } else {
+            console.log(
+              "Candidate",
+              candidateChoice.letter,
+              "doesnt match",
+              letterAtIndex
+            );
+          }
+        }
+      }
+    }
+  }
+
+  renderResetModal() {
+    const { resetModalVisible } = this.state;
+    const modal = (
+      <Modal show={resetModalVisible} onHide={() => this.hideResetModal()}>
+        <Modal.Body>
+          <span>Are you sure you want to start over?</span>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.resetState.bind(this)}>Yes</Button>
+          <Button onClick={this.hideResetModal.bind(this)}>No</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+    return modal;
+  }
+
+  renderControls() {
+    const { puzzle } = this.state;
+    return (
+      <div
+        className={classNames("controls", {
+          disabled: puzzle && !this.isPuzzleSolved(puzzle.answer)
+        })}
+      >
+        <img
+          src={"/images/refresh-512.png"}
+          width="48px"
+          onClick={() => this.showResetModal()}
+        />
+        <img
+          src={"/images/next_arrow-512.png"}
+          width="48px"
+          onClick={() => this.goToNextWord()}
+          disabled={puzzle && !this.isPuzzleSolved(puzzle.answer)}
+        />
+      </div>
+    );
+  }
+
+  showResetModal() {
+    this.setState({
+      resetModalVisible: true
+    });
+  }
+
+  hideResetModal() {
+    this.setState({
+      resetModalVisible: false
+    });
   }
 
   renderLetter() {
@@ -127,7 +260,7 @@ class App extends Component {
     return (
       <Letter
         sentences={sentences}
-        title={"This is the title"}
+        title={"Happy Birthday!"}
         punctuation={this.renderPunctuation()}
       />
     );
@@ -149,17 +282,24 @@ class App extends Component {
     }
   }
 
-  onChoiceSelected(choice) {
+  onChoiceSelected(choice, placeAtIndex = null) {
     const { puzzle } = this.state;
+    if (!puzzle) return;
+    if (this.isPuzzleSolved(puzzle.answer)) return;
 
     const updatedChoices = [...puzzle.selectedChoices];
-    for (let index = 0; index < updatedChoices.length; index++) {
-      const element = updatedChoices[index];
-      if (element === undefined || element === null) {
-        updatedChoices[index] = choice;
-        break;
+    let index;
+    if (placeAtIndex === null) {
+      for (index = 0; index < updatedChoices.length; index++) {
+        const element = updatedChoices[index];
+        if (element === undefined || element === null) {
+          break;
+        }
       }
+    } else {
+      index = placeAtIndex;
     }
+    updatedChoices[index] = choice;
 
     console.log("Updating selectedChoices", updatedChoices);
 
@@ -211,6 +351,21 @@ class App extends Component {
         }
       });
     }
+  }
+
+  isChoiceSelected(choice) {
+    const { puzzle } = this.state;
+    if (!puzzle) {
+      return false;
+    }
+
+    const { selectedChoices } = puzzle;
+    return selectedChoices.find(
+      otherChoice =>
+        otherChoice &&
+        otherChoice.letter === choice.letter &&
+        otherChoice.index == choice.index
+    );
   }
 
   onChoiceDeselected(choice) {
@@ -274,6 +429,18 @@ class App extends Component {
   isPuzzleSolved(text) {
     const { solvedPuzzles } = this.state;
     return solvedPuzzles.indexOf(text.toUpperCase()) > -1;
+  }
+
+  resetState() {
+    this.setState(
+      {
+        ...DEFAULT_STATE,
+        sentences: getSentences(0, 0)
+      },
+      () => {
+        this.saveState();
+      }
+    );
   }
 
   goToNextWord() {

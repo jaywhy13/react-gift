@@ -1,7 +1,14 @@
+.sentence {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .word {
   padding: 5px;
-  font-size: 65px;
+  font-size: 40px;
   font-family: "Grand Hotel";
   text-shadow: 4px 5px 2px #474747;
   margin-right: 4px;
+  font-family: "Merienda One", cursive;
+  font-family: "Berkshire Swash", cursive;
 }
