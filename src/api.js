@@ -11,21 +11,21 @@ Thank you for being amazing, from all the lessons I've learned and the countless
 For me she became a mistress of the culinary arts, a chef of no mean order 
 No exotic pastry, five star esteemed gourmet option, or rich, colored green juice was beyond her 
 Healthy and tasty, rich and colorful, sumptuous and delightful, every spoon an experience to remember
-The ecstacy that greets the eye, the arousal that surprises the taste buds, the journey offered the nasal passage, how many restaurants can offer? 
+The ecstacy that greets the eye, the arousal that surprises the taste buds, the excursion offered the nasal passage, how many restaurants can offer? 
 ~~
-My bowels have never been so fluid, through her love they have learnt the meaning of frequency 
+My bowels have never been so fluid ... through her love they have learnt the meaning of frequency 
 Such care and love that extends into regions no nose can survive, she has trodded boldly 
-Only due to a vested interest, the fruit of a love knowing no bound, growing and flowing endlessly 
+Only due to a vested interest ... the fruit of a love knowing no bound, growing and flowing endlessly 
 My health is overcome with gratitude.. This husband can boast a wife doubling as doctor, nurse and pharmacy 
 ~~
-On a journey acquainted with many mountains, and valleys alike, she represents much of the consistency that exists
+On a journey acquainted with many mountains and valleys alike ... she represents much of the consistency that exists
 A constant, unwavering commitment and dedication has been the protagonist in her story despite all of life's twists 
 Her love and care, has displayed a clear dissatisfaction with mere survival of difficulty evidenced by how it persists 
-Amazing, typically the word coined for her... But to accurately describe her, the English language barely assists 
+Amazing, typically the word coined for her... But to accurately describe her, the english language barely assists 
 ~~
 It matters not how many unattached, less stressed soldiers have conquered this mighty feat, 
 Your audacity, perseverence, sagacity, resilience, all exemplify that which many colleagues cannot compete 
-Only the folly gaze across the sea of uniforms thinking the battle is just the same for each soldier in the fleet, 
+Only the folly gaze across the sea of uniforms thinking the battle is just the same for each soldier in the fleet 
 Result aside... You're my victorious trooper... Spirited, courageous, bold enough to walk this path... No result means defeat 
 ~~
 To call her wife is the most esteemed honour I possess
@@ -54,7 +54,10 @@ const SENTENCES = makeSentences(RAW);
 export const getWordAfter = (currentSentence, currentWord) => {
   if (currentSentence < SENTENCES.length) {
     const words = SENTENCES[currentSentence];
-    if (currentWord + 1 >= words.length) {
+    if (
+      currentWord + 1 >= words.length &&
+      currentSentence + 1 < SENTENCES.length
+    ) {
       return SENTENCES[currentSentence + 1][0];
     }
     return SENTENCES[currentSentence][currentWord + 1];
